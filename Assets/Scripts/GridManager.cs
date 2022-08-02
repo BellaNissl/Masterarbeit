@@ -9,7 +9,7 @@ public class GridManager : MonoBehaviour
 
     [SerializeField] private Tile _tilePrefab;
 
-    [SerializeField] private Transform _cam;
+   // [SerializeField] private Transform _cam;
 
     private Dictionary<Vector2, Tile> _tiles; 
 
@@ -31,7 +31,7 @@ public class GridManager : MonoBehaviour
             }
         }
 
-        _cam.transform.position = new Vector3((float)_width / 2.0f - 0.5f, (float)_height / 2.0f - 0.5f, -10);
+       // _cam.transform.position = new Vector3((float)_width / 2.0f - 0.5f, (float)_height / 2.0f - 0.5f, -10);
     }
 
     public Tile getTileAtPosition(Vector2 pos) {
