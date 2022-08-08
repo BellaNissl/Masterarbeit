@@ -6,15 +6,19 @@ public class CityLogic : MonoBehaviour, TileLogic
 {
     public static CityLogic Instance { get; private set; }
 
-    [field: SerializeField] public Color _color { get; set; }
+    [field: SerializeField] public Color _color { get; private set; }
 
-    [field: SerializeField] public bool _pv_buildable { get; set; }
+    [field: SerializeField] public bool _photovoltaic_buildable { get; private set; }
 
-    [field: SerializeField] public bool _wind_buildable { get; set; }
+    [field: SerializeField] public bool _agrovoltaic_buildable { get; private set; }
 
-    [field: SerializeField] public string _pv_message { get; set; }
+    [field: SerializeField] public bool _wind_turbine_buildable { get; private set; }
 
-    [field: SerializeField] public string _wind_message { get; set; }
+    [field: SerializeField] public string _photovoltaic_message { get; private set; }
+
+    [field: SerializeField] public string _agrovoltaic_message { get; private set; }
+
+    [field: SerializeField] public string _wind_turbine_message { get; private set; }
 
     private void Awake(){
         Instance = this;

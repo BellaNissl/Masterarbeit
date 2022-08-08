@@ -21,7 +21,6 @@ public class GridManager : MonoBehaviour
         Instance = this;
     }
 
-
     void Start() {
         GenerateGrid();
     }
@@ -41,17 +40,20 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    // check tile neighbours
-    public void checkneighbours(Vector2 pos){
-        Tiletype type = getTileAtPosition(pos).GetTileType();
-        for(int x = -1; x <= pos.x + 1; x++) {
-            for(int y = -1; y <= pos.y + 1; y++) {
-                if(pos.x != x && pos.y != y) {
+    // check tile neighbours for specific types
+    public List<Tile> GetNeighbours(Vector2 current_pos){
+        List<Tile> neighbours = new List<Tile>();
+        for(int x = -1; x <= current_pos.x + 1; x++) {
+            for(int y = -1; y <= current_pos.y + 1; y++) {
+                if(current_pos.x != x && current_pos.y != y) {
                     Tile neighbour = getTileAtPosition(new Vector2(x, y));
-                    neighbour.ReactOnType(type);
+                    if(neighbour != null) {
+                        neighbours.Add(neighbour);
+                    }
                 }
             }
         }
+        return neighbours;
     }
 
     // return tile at given position
@@ -64,11 +66,17 @@ public class GridManager : MonoBehaviour
     }
 
     // select tile at position and deselect last selection
+    // set button integrability accordingly
     public void SelectTile(Vector2 pos){
         if(_selected_pos != null && _selected_pos != INVALID) {
             getTileAtPosition(_selected_pos).Deselect();
         }
         _selected_pos = pos;
+        if(_selected_pos != null && _selected_pos != INVALID) {
+            ButtonManager.Instance.AdaptIntegrability(getTileAtPosition(_selected_pos).GetTileLogic());
+        } else {
+            ButtonManager.Instance.SetButtonsInteractable();
+        }
     }
 
     // return the currently selected tile

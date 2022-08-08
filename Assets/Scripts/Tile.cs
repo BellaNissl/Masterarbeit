@@ -13,9 +13,10 @@ public class Tile : MonoBehaviour
     [SerializeField] private GameObject _highlight;
     [SerializeField] private GameObject _selection;
 
-    // energy color
-    [SerializeField] private Color _pv_color;
-    [SerializeField] private Color _wind_color;
+    // energy colors
+    [SerializeField] private Color _photovoltaic_color;
+    [SerializeField] private Color _agrovoltaic_color;
+    [SerializeField] private Color _wind_turbine_color;
 
     // logic
     private GameLogic _game;
@@ -24,6 +25,10 @@ public class Tile : MonoBehaviour
 
     public Tiletype GetTileType(){
         return _type;
+    }
+
+    public TileLogic GetTileLogic() {
+        return _logic;
     }
 
     // initialize tile logic
@@ -49,66 +54,46 @@ public class Tile : MonoBehaviour
             Debug.Log("No type set!!!");
             break;
         }
-
         _renderer.color = _logic._color;
     }
 
-    // let the game react to the built type depending on the neighbours and tile type
-    public void ReactOnType(Tiletype type){
-        Debug.Log(_type + "react on " + type);
-        if(_type ==  Tiletype.city) {
-
-        }
-        if(_type ==  Tiletype.farm) {
-            
-        }
-        if(_type ==  Tiletype.wood) {
-            
-        }
-        if(_type ==  Tiletype.field) {
-            
-        }
-
-        _game.UpdateResources(1, 1, 1, 1);
-    }
-
-    // build pv generator on tile
-    public void BuildPV() {
-        if(!CheckIfBuildable()) {
-            return;
-        }
-        if(_logic._pv_buildable) {
-            _renderer.color = _pv_color;
-            _built = true;
-            _game.UpdateResources(20, 10, -10, 0);
-        } else {
-            _game.DisplayMessage(_logic._pv_message);
-        }
-    }
-
-
-    // build wind generator on tile
-    public void BuildWind(){
-        if(!CheckIfBuildable()) {
-            return;
-        }
-        if(_logic._wind_buildable) {
-            _renderer.color = _wind_color;
-            _built = true;
-            _game.UpdateResources(10, 20, 0, -10);
-        } else {
-            _game.DisplayMessage(_logic._wind_message);
-        }
-    }
-
-    public bool CheckIfBuildable(){
+    // build on tile
+    public string Build(EnergySource source){
         if(_built) {
-            _game.DisplayMessage("already built");
-            return false;
+            return "already built";
         }
-        return true;
-    }
 
+        switch(source) 
+        {
+            case EnergySource.photovoltaic:
+                if(_logic._photovoltaic_buildable) {
+                    _renderer.color = _photovoltaic_color;
+                    _built = true; 
+                    return "";
+                } else {
+                    return _logic._photovoltaic_message;
+                }
+            case EnergySource.agrovoltaic:
+                if(_logic._agrovoltaic_buildable) {
+                    _renderer.color = _agrovoltaic_color;
+                    _built = true; 
+                    return "";
+                } else {
+                    return _logic._agrovoltaic_message;
+                }
+            case EnergySource.wind_turbine:
+                if(_logic._wind_turbine_buildable) {
+                    _renderer.color = _wind_turbine_color;
+                    _built = true; 
+                    return "";
+                } else {
+                    return _logic._wind_turbine_message;
+                }
+            default:
+                Debug.Log("source type not valid!!");
+                return "";
+        }
+    }
 
     // highlight when hovering
     private void OnMouseEnter(){

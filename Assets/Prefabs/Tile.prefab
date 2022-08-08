@@ -104,8 +104,9 @@ MonoBehaviour:
   _renderer: {fileID: 1011311764563059286}
   _highlight: {fileID: 8037971269616393772}
   _selection: {fileID: 4034428162423753686}
-  _pv_color: {r: 1, g: 0.7752745, b: 0.37169808, a: 1}
-  _wind_color: {r: 0.27735847, g: 0.5495513, b: 1, a: 1}
+  _photovoltaic_color: {r: 1, g: 0.9492165, b: 0, a: 1}
+  _agrovoltaic_color: {r: 1, g: 0.47710186, b: 0, a: 1}
+  _wind_turbine_color: {r: 0, g: 0.74335265, b: 1, a: 0.94509804}
 --- !u!61 &2190741408381396997
 BoxCollider2D:
   m_ObjectHideFlags: 0

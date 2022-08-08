@@ -20,6 +20,12 @@ using UnityEngine.UI;
         none
     };
 
+    public enum EnergySource {
+        photovoltaic,
+        agrovoltaic,
+        wind_turbine
+    }
+
 public class GameLogic : MonoBehaviour
 {
     public static GameLogic Instance { get; private set; }
@@ -44,14 +50,11 @@ public class GameLogic : MonoBehaviour
     [SerializeField] private GameObject _happiness_bar;
     [SerializeField] private GameObject _money_bar;
 
-    // values of energy
+    // game values
     [SerializeField] private int _pvEnergy;
-    [SerializeField] private int _solarEnergy;
-
-    // buttons
-    public Button _pv_button;
-    public Button _wind_button;
-
+    [SerializeField] private int _pv_price;
+    [SerializeField] private int _solar_energy;
+    [SerializeField] private int _solar_price;
 
     // set ressource values at start
     void Start(){
@@ -88,6 +91,16 @@ public class GameLogic : MonoBehaviour
     // display message to players
     public void DisplayMessage(string message) {
 
+    }
+
+    // build energy source on tile
+    public void BuildOnTile(Tile tile, EnergySource source) {
+        string message = tile.Build(source);
+        if(message != "") {
+            DisplayMessage(message);
+        } else {
+            UpdateResources(0, 0, 0, -_pv_price);
+        }
     }
 
     // update ressource values

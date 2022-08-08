@@ -4,13 +4,17 @@ using UnityEngine;
 
 public interface TileLogic
 {
-    Color _color { get; set; }
+    Color _color { get; }
 
-    bool _pv_buildable { get; set; }
+    bool _photovoltaic_buildable { get; }
 
-    bool _wind_buildable { get; set; }
+    bool _agrovoltaic_buildable { get; }
 
-    string _pv_message { get; set; }
+    bool _wind_turbine_buildable { get; }
 
-    string _wind_message { get; set; }
+    string _photovoltaic_message { get; }
+
+    string _agrovoltaic_message { get; }
+
+    string _wind_turbine_message { get; }
 }
