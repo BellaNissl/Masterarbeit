@@ -6,9 +6,14 @@ using UnityEngine.UI;
 public class Bar : MonoBehaviour
 {
     private const float MAX_VALUE = 100.0f;
-    public float _value;
+    private float _value;
 
     private Image _bar;
+
+    public void SetValue(float value) {
+        _value = value;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
