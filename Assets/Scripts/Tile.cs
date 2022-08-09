@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Tile : MonoBehaviour
 {
@@ -13,48 +12,31 @@ public class Tile : MonoBehaviour
     [SerializeField] private GameObject _highlight;
     [SerializeField] private GameObject _selection;
 
-    // energy colors
-    [SerializeField] private Color _photovoltaic_color;
-    [SerializeField] private Color _agrovoltaic_color;
-    [SerializeField] private Color _wind_turbine_color;
-
     // logic
     private GameLogic _game;
-    private TileLogic _logic;
     private bool _built;
+    private EnergySource _buildType;
 
     public Tiletype GetTileType(){
         return _type;
     }
 
-    public TileLogic GetTileLogic() {
-        return _logic;
+    public bool GetBuildStatus() {
+        return _built;
+    }
+
+    public EnergySource GetBuildType(){
+        if(_built) {
+            return _buildType;
+        } 
+        return EnergySource.none;
     }
 
     // initialize tile logic
     public void Init(Tiletype type) {
         _game = GameLogic.Instance;
         _type = type;
-
-        switch (_type)
-        {
-            case Tiletype.city:
-                _logic = CityLogic.Instance; 
-                break;
-            case Tiletype.wood:
-                _logic = WoodLogic.Instance; 
-                break;
-            case Tiletype.farm:
-                _logic = FarmLogic.Instance; 
-                break;
-            case Tiletype.field:
-                _logic = FieldLogic.Instance; 
-                break;
-            default:
-            Debug.Log("No type set!!!");
-            break;
-        }
-        _renderer.color = _logic._color;
+        _renderer.color = _game._tiles[_type]._color;
     }
 
     // build on tile
@@ -62,37 +44,14 @@ public class Tile : MonoBehaviour
         if(_built) {
             return "already built";
         }
+        if(_game._tiles[_type]._supportedEnergy.Contains(source)) {
+            _buildType = source;
+            _renderer.color = _game._energySources[source]._color;
+            _built = true;
+            return "";
+        } 
 
-        switch(source) 
-        {
-            case EnergySource.photovoltaic:
-                if(_logic._photovoltaic_buildable) {
-                    _renderer.color = _photovoltaic_color;
-                    _built = true; 
-                    return "";
-                } else {
-                    return _logic._photovoltaic_message;
-                }
-            case EnergySource.agrovoltaic:
-                if(_logic._agrovoltaic_buildable) {
-                    _renderer.color = _agrovoltaic_color;
-                    _built = true; 
-                    return "";
-                } else {
-                    return _logic._agrovoltaic_message;
-                }
-            case EnergySource.wind_turbine:
-                if(_logic._wind_turbine_buildable) {
-                    _renderer.color = _wind_turbine_color;
-                    _built = true; 
-                    return "";
-                } else {
-                    return _logic._wind_turbine_message;
-                }
-            default:
-                Debug.Log("source type not valid!!");
-                return "";
-        }
+        return "cannot build that here";
     }
 
     // highlight when hovering

@@ -23,7 +23,8 @@ using UnityEngine.UI;
     public enum EnergySource {
         photovoltaic,
         agrovoltaic,
-        wind_turbine
+        windTurbine,
+        none
     }
 
 public class GameLogic : MonoBehaviour
@@ -37,27 +38,34 @@ public class GameLogic : MonoBehaviour
 
 
     // current game timeline
-    [SerializeField] private int _year;
-    [SerializeField] private int _season;
+    private int _year;
+    private int _season;
 
     // values of resources
-    [SerializeField] private int _energy;
-    [SerializeField] private int _biodiversity;
-    [SerializeField] private int _happiness;
-    [SerializeField] private int _money;
-    [SerializeField] private GameObject _energy_bar;
-    [SerializeField] private GameObject _biodiversity_bar;
-    [SerializeField] private GameObject _happiness_bar;
-    [SerializeField] private GameObject _money_bar;
+    private int _energy;
+    private int _biodiversity;
+    private int _happiness;
+    private int _money;
+    [SerializeField] private GameObject _energyBar;
+    [SerializeField] private GameObject _biodiversityBar;
+    [SerializeField] private GameObject _happinessBar;
+    [SerializeField] private GameObject _moneyBar;
 
-    // game values
-    [SerializeField] private int _pvEnergy;
-    [SerializeField] private int _pv_price;
-    [SerializeField] private int _solar_energy;
-    [SerializeField] private int _solar_price;
+    [HideInInspector] public Dictionary<EnergySource, EnergyLogic> _energySources  { get; private set; }
+    [HideInInspector] public Dictionary<Tiletype, TileLogic> _tiles  { get; private set; }
+
+    public int GetSeason() {
+        return _season;
+    }
+
+    public int GetYear() {
+        return _year;
+    }
 
     // set ressource values at start
-    void Start(){
+    private void Start() {
+        _year = 0;
+        _season = 1;
         _energy = MAX_VALUE / 2;
         _biodiversity = MAX_VALUE;
         _money = MAX_VALUE;
@@ -67,12 +75,26 @@ public class GameLogic : MonoBehaviour
 
     private void Awake(){
         Instance = this;
+        FillDictionaries();   
+    }
+
+    private void FillDictionaries() {
+        _energySources = new Dictionary<EnergySource, EnergyLogic>();
+        _energySources[EnergySource.photovoltaic] = PhotovoltaicLogic.Instance;
+        _energySources[EnergySource.agrovoltaic] = AgrovoltaicLogic.Instance;
+        _energySources[EnergySource.windTurbine] = WindTurbineLogic.Instance;
+
+        _tiles = new Dictionary<Tiletype, TileLogic>();
+        _tiles[Tiletype.city] = CityLogic.Instance;
+        _tiles[Tiletype.farm] = FarmLogic.Instance;
+        _tiles[Tiletype.wood] = WoodLogic.Instance;
+        _tiles[Tiletype.field] = FieldLogic.Instance;
     }
 
     // end current year
     private void EndYear() {
         if(_year < YEARS) {
-            _season = 0;
+            _season = 1;
             _year++;
         } else {
             // end game
@@ -99,7 +121,8 @@ public class GameLogic : MonoBehaviour
         if(message != "") {
             DisplayMessage(message);
         } else {
-            UpdateResources(0, 0, 0, -_pv_price);
+            UpdateResources(0, 0, 0, -_energySources[source]._price);
+            EndSeason();
         }
     }
 
@@ -119,10 +142,10 @@ public class GameLogic : MonoBehaviour
     // update ressource bars
     private void UpdateBars()
     {
-        _energy_bar.GetComponent<Bar>().SetValue(_energy);
-        _biodiversity_bar.GetComponent<Bar>().SetValue(_biodiversity);
-        _happiness_bar.GetComponent<Bar>().SetValue(_happiness);
-        _money_bar.GetComponent<Bar>().SetValue(_money);
+        _energyBar.GetComponent<Bar>().SetValue(_energy);
+        _biodiversityBar.GetComponent<Bar>().SetValue(_biodiversity);
+        _happinessBar.GetComponent<Bar>().SetValue(_happiness);
+        _moneyBar.GetComponent<Bar>().SetValue(_money);
     }
 
     private void GameOver() {

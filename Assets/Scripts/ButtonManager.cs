@@ -6,24 +6,29 @@ using UnityEngine.UI;
 public class ButtonManager : MonoBehaviour
 {
     public static ButtonManager Instance { get; private set; }
-    [SerializeField] private Button _photovoltaic_button;
-    [SerializeField] private Button _agrovoltaic_button;
-    [SerializeField] private Button _wind_turbine_button;
-
+   
     private void Awake(){
         Instance = this;
     }
 
     // make buttons not interactable when selected tile does not support energy type
-    public void AdaptIntegrability(TileLogic logic){
-        _photovoltaic_button.interactable = logic._photovoltaic_buildable;
-        _agrovoltaic_button.interactable = logic._agrovoltaic_buildable;
-        _wind_turbine_button.interactable = logic._wind_turbine_buildable;
+    public void AdaptIntegrability(Tiletype type){
+        Dictionary<EnergySource, EnergyLogic> sources = GameLogic.Instance._energySources;
+        foreach(KeyValuePair<EnergySource, EnergyLogic> source in sources) {
+            AdaptIntegrability(type, source.Key);
+        }
+    }
+
+    private void AdaptIntegrability(Tiletype type, EnergySource source) {
+        GameLogic.Instance._energySources[source]._button.interactable = GameLogic.Instance._tiles[type]._supportedEnergy.Contains(source);
     }
 
     // reset all buttons to be interactable
-    public void SetButtonsInteractable(){
-        _photovoltaic_button.interactable = _agrovoltaic_button.interactable = _wind_turbine_button.interactable = true;
+    public void SetButtonsInteractable(bool interactable){
+        Dictionary<EnergySource, EnergyLogic> sources = GameLogic.Instance._energySources;
+        foreach(KeyValuePair<EnergySource, EnergyLogic> source in sources) {
+            sources[source.Key]._button.interactable = interactable;
+        }
     }
 
     public void PhotovoltaicButtonClicked()
@@ -47,7 +52,7 @@ public class ButtonManager : MonoBehaviour
     public void WindTurbineButtonClicked() {
         Tile selected = GridManager.Instance.GetSelectedTile();
         if (selected != null) {
-            GameLogic.Instance.BuildOnTile(selected, EnergySource.wind_turbine);
+            GameLogic.Instance.BuildOnTile(selected, EnergySource.windTurbine);
             GridManager.Instance.SelectTile(GridManager.INVALID);
         }
     }

@@ -11,11 +11,12 @@ public class GridManager : MonoBehaviour
     [SerializeField] private int _height;
 
     // tile generation 
-    [SerializeField] private Tile _tile_prefab;
+    [SerializeField] private Tile _tilePrefab;
     private Dictionary<Vector2, Tile> _tiles; 
+    private Tiletype[] occurances = {Tiletype.city, Tiletype.farm, Tiletype.wood, Tiletype.wood, Tiletype.wood, Tiletype.field, Tiletype.field, Tiletype.field, Tiletype.field, Tiletype.field};
 
     // currently selected tile
-    private Vector2 _selected_pos;
+    private Vector2 _selectedPos;
 
     private void Awake(){
         Instance = this;
@@ -23,6 +24,7 @@ public class GridManager : MonoBehaviour
 
     void Start() {
         GenerateGrid();
+        _selectedPos = INVALID;
     }
 
     // generate grid and spawn tiles 
@@ -30,22 +32,21 @@ public class GridManager : MonoBehaviour
         _tiles = new Dictionary<Vector2, Tile>();
         for(int x = 0; x < _width; x++) {
             for(int y = 0; y < _height; y++) {
-                var spawned_tile = Instantiate(_tile_prefab, new Vector3(x, y), Quaternion.identity);
-                spawned_tile.name = $"Tile {x} {y}";
-
-                var isOffset = (x % 2 == 0 && y % 2 != 0) || (x % 2 != 0 && y % 2 == 0) ;
-                spawned_tile.Init(Tiletype.field);
-                _tiles[new Vector2(x, y)] = spawned_tile;
+                var spawnedTile = Instantiate(_tilePrefab, new Vector3(x, y), Quaternion.identity);
+                spawnedTile.name = $"Tile {x} {y}";
+                int index = Random.Range(0, occurances.Length);
+                spawnedTile.Init(occurances[index]);
+                _tiles[new Vector2(x, y)] = spawnedTile;
             }
         }
     }
 
     // check tile neighbours for specific types
-    public List<Tile> GetNeighbours(Vector2 current_pos){
+    public List<Tile> GetNeighbours(Vector2 currentPos){
         List<Tile> neighbours = new List<Tile>();
-        for(int x = -1; x <= current_pos.x + 1; x++) {
-            for(int y = -1; y <= current_pos.y + 1; y++) {
-                if(current_pos.x != x && current_pos.y != y) {
+        for(int x = -1; x <= currentPos.x + 1; x++) {
+            for(int y = -1; y <= currentPos.y + 1; y++) {
+                if(currentPos.x != x && currentPos.y != y) {
                     Tile neighbour = getTileAtPosition(new Vector2(x, y));
                     if(neighbour != null) {
                         neighbours.Add(neighbour);
@@ -68,19 +69,23 @@ public class GridManager : MonoBehaviour
     // select tile at position and deselect last selection
     // set button integrability accordingly
     public void SelectTile(Vector2 pos){
-        if(_selected_pos != null && _selected_pos != INVALID) {
-            getTileAtPosition(_selected_pos).Deselect();
+        if(_selectedPos != null && _selectedPos != INVALID) {
+            getTileAtPosition(_selectedPos).Deselect();
         }
-        _selected_pos = pos;
-        if(_selected_pos != null && _selected_pos != INVALID) {
-            ButtonManager.Instance.AdaptIntegrability(getTileAtPosition(_selected_pos).GetTileLogic());
+        _selectedPos = pos;
+        if(_selectedPos != null && _selectedPos != INVALID) {
+            if( getTileAtPosition(_selectedPos).GetBuildStatus()) {
+                ButtonManager.Instance.SetButtonsInteractable(false);
+            } else {
+                ButtonManager.Instance.AdaptIntegrability(getTileAtPosition(_selectedPos).GetTileType());
+            }
         } else {
-            ButtonManager.Instance.SetButtonsInteractable();
+            ButtonManager.Instance.SetButtonsInteractable(true);
         }
     }
 
     // return the currently selected tile
     public Tile GetSelectedTile(){
-        return getTileAtPosition(_selected_pos);
+        return getTileAtPosition(_selectedPos);
     }
 }
