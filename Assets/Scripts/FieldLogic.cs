@@ -8,6 +8,8 @@ public class FieldLogic : MonoBehaviour, TileLogic
 
     [field: SerializeField] public Color _color { get; private set; }
 
+    [field: SerializeField] public Sprite _sprite { get; private set; }
+
     [field: SerializeField] public List<EnergySource> _supportedEnergy { get; private set; }
 
     [field: SerializeField] public string _name { get; private set; }

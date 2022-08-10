@@ -365,8 +365,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4291885055
+  m_fontColor: {r: 1, g: 0.96862745, b: 0.8156863, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -471,7 +471,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 291.99997, y: 73}
+  m_AnchoredPosition: {x: 291.99997, y: 90.5}
   m_SizeDelta: {x: 100, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &193880190
@@ -543,15 +543,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.83137256, g: 0.79607844, b: 0.62352943, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: b7cff3a00a785444ca8841232477274a, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -618,6 +618,7 @@ MonoBehaviour:
   <_happiness>k__BackingField: 5
   <_button>k__BackingField: {fileID: 1526683165}
   <_color>k__BackingField: {r: 1, g: 0.5881572, b: 0, a: 1}
+  <_sprite>k__BackingField: {fileID: 0}
   <_name>k__BackingField: Agro-Photovoltaik Anlage
 --- !u!1 &268338079 stripped
 GameObject:
@@ -691,8 +692,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4291885055
+  m_fontColor: {r: 1, g: 0.96862745, b: 0.8156863, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -868,15 +869,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.83137256, g: 0.79607844, b: 0.62352943, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 96c30051886902b458486f4666f7b1ad, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -961,7 +962,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 1, g: 0.96862745, b: 0.8156863, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1087,7 +1088,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 0.7735849, b: 0.71365815, a: 1}
+  m_Color: {r: 0.8301887, g: 0.7947282, b: 0.6218583, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1150,7 +1151,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 291.99997, y: -67}
+  m_AnchoredPosition: {x: 291.99997, y: -59.5}
   m_SizeDelta: {x: 100, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &388579947
@@ -1222,15 +1223,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.83137256, g: 0.79607844, b: 0.62352943, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: b7cff3a00a785444ca8841232477274a, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1285,7 +1286,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 291.99997, y: -137}
+  m_AnchoredPosition: {x: 291.99997, y: -134.5}
   m_SizeDelta: {x: 100, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &398905348
@@ -1357,15 +1358,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.83137256, g: 0.79607844, b: 0.62352943, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: b7cff3a00a785444ca8841232477274a, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1521,6 +1522,7 @@ MonoBehaviour:
   <_happiness>k__BackingField: -10
   <_button>k__BackingField: {fileID: 193880190}
   <_color>k__BackingField: {r: 1, g: 0.908556, b: 0, a: 1}
+  <_sprite>k__BackingField: {fileID: 0}
   <_name>k__BackingField: Photovoltaik Anlage
 --- !u!1 &589776007 stripped
 GameObject:
@@ -1595,7 +1597,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 1, g: 0.96862745, b: 0.8156863, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1712,6 +1714,7 @@ MonoBehaviour:
   <_happiness>k__BackingField: -10
   <_button>k__BackingField: {fileID: 388579947}
   <_color>k__BackingField: {r: 0, g: 0.5073526, b: 1, a: 1}
+  <_sprite>k__BackingField: {fileID: 0}
   <_name>k__BackingField: Wind Turbinen
 --- !u!1 &766122102
 GameObject:
@@ -1758,6 +1761,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <_color>k__BackingField: {r: 0.6278157, g: 1, b: 0, a: 1}
+  <_sprite>k__BackingField: {fileID: 21300000, guid: 6bfb468e96bf08141a6cbc66585c5834, type: 3}
   <_supportedEnergy>k__BackingField: 0000000002000000
   <_name>k__BackingField: Feld
 --- !u!1 &775365544
@@ -1805,6 +1809,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <_color>k__BackingField: {r: 0, g: 0.4811321, b: 0.0060966513, a: 1}
+  <_sprite>k__BackingField: {fileID: 21300000, guid: 623bcdee747324645a0a2162780b3d2d, type: 3}
   <_supportedEnergy>k__BackingField: 
   <_name>k__BackingField: Wald
 --- !u!1 &794114691
@@ -1985,8 +1990,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4279905079
+  m_fontColor: {r: 0.21568629, g: 0.16862746, b: 0.10196079, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2185,7 +2190,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4632045338290797631, guid: d0fac8ffd570cc940942f75cae73843e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -10
+      value: -57.600002
       objectReference: {fileID: 0}
     - target: {fileID: 4632045338290797631, guid: d0fac8ffd570cc940942f75cae73843e, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2280,8 +2285,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4279905079
+  m_fontColor: {r: 0.21568629, g: 0.16862746, b: 0.10196079, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2415,8 +2420,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4291885055
+  m_fontColor: {r: 1, g: 0.96862745, b: 0.8156863, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2550,8 +2555,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4279905079
+  m_fontColor: {r: 0.21568629, g: 0.16862746, b: 0.10196079, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2687,8 +2692,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4279905079
+  m_fontColor: {r: 0.21568629, g: 0.16862746, b: 0.10196079, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2848,7 +2853,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4632045338290797631, guid: d0fac8ffd570cc940942f75cae73843e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 270
+      value: 222.4
       objectReference: {fileID: 0}
     - target: {fileID: 4632045338290797631, guid: d0fac8ffd570cc940942f75cae73843e, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2944,7 +2949,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 1, g: 0.96862745, b: 0.8156863, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3075,7 +3080,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 0.7735849, b: 0.71365815, a: 1}
+  m_Color: {r: 0.8301887, g: 0.7947282, b: 0.6218583, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3291,7 +3296,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 0.21568629, g: 0.16862746, b: 0.10196079, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3480,7 +3485,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 291.99997, y: 3}
+  m_AnchoredPosition: {x: 291.99997, y: 15.5}
   m_SizeDelta: {x: 100, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1526683165
@@ -3552,15 +3557,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.83137256, g: 0.79607844, b: 0.62352943, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: b7cff3a00a785444ca8841232477274a, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3826,7 +3831,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 0.21568629, g: 0.16862746, b: 0.10196079, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3938,6 +3943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <_color>k__BackingField: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 1}
+  <_sprite>k__BackingField: {fileID: 21300000, guid: e172b27e125c0534da8dddb180dd6134, type: 3}
   <_supportedEnergy>k__BackingField: 00000000
   <_name>k__BackingField: Stadt
 --- !u!1 &1839373555
@@ -4007,8 +4013,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4279905079
+  m_fontColor: {r: 0.21568629, g: 0.16862746, b: 0.10196079, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4220,7 +4226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4632045338290797631, guid: d0fac8ffd570cc940942f75cae73843e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 130
+      value: 82.4
       objectReference: {fileID: 0}
     - target: {fileID: 4632045338290797631, guid: d0fac8ffd570cc940942f75cae73843e, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4326,7 +4332,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 0.21568629, g: 0.16862746, b: 0.10196079, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4438,6 +4444,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <_color>k__BackingField: {r: 0.49056602, g: 0.30917412, b: 0, a: 1}
+  <_sprite>k__BackingField: {fileID: 21300000, guid: 0fa8e305005b4ca42b05a276eec815a7, type: 3}
   <_supportedEnergy>k__BackingField: 01000000
   <_name>k__BackingField: Bauer
 --- !u!1 &2132603726
@@ -4594,7 +4601,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4632045338290797631, guid: d0fac8ffd570cc940942f75cae73843e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -150
+      value: -197.6
       objectReference: {fileID: 0}
     - target: {fileID: 4632045338290797631, guid: d0fac8ffd570cc940942f75cae73843e, type: 3}
       propertyPath: m_AnchoredPosition.y

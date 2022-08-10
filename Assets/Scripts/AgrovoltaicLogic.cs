@@ -21,6 +21,8 @@ public class AgrovoltaicLogic : MonoBehaviour, EnergyLogic
 
     [field: SerializeField] public Color _color { get; private set; }
 
+    [field: SerializeField] public Sprite _sprite { get; private set; }
+
     [field: SerializeField] public string _name { get; private set; }
 
     private void Awake(){

@@ -8,5 +8,7 @@ public interface TileLogic
 
     List<EnergySource> _supportedEnergy { get; }
 
+    Sprite _sprite { get; }
+
     string _name { get; }
 }

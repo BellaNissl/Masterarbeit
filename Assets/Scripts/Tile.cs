@@ -36,7 +36,11 @@ public class Tile : MonoBehaviour
     public void Init(Tiletype type) {
         _game = GameLogic.Instance;
         _type = type;
-        _renderer.color = _game._tiles[_type]._color;
+        if(_game._tiles[_type]._sprite != null) {
+            _renderer.sprite = _game._tiles[_type]._sprite;
+        } else {
+            _renderer.color = _game._tiles[_type]._color;
+        }
     }
 
     // build on tile
@@ -46,7 +50,11 @@ public class Tile : MonoBehaviour
         }
         if(_game._tiles[_type]._supportedEnergy.Contains(source)) {
             _buildType = source;
-            _renderer.color = _game._energySources[source]._color;
+            if(_game._energySources[source]._sprite != null) {
+                _renderer.sprite = _game._energySources[source]._sprite;
+            } else {
+                _renderer.color = _game._energySources[source]._color;
+            }
             _built = true;
             return "";
         } 

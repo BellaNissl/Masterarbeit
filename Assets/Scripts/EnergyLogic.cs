@@ -19,5 +19,7 @@ public interface EnergyLogic
 
     Color _color { get; }
 
+    Sprite _sprite { get; }
+
     string _name { get; }
 }
