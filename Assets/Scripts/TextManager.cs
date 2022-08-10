@@ -13,7 +13,7 @@ public class TextManager : MonoBehaviour
     [SerializeField] private GameObject _message;
 
     void Update(){
-        _year.GetComponent<TextMeshProUGUI>().text = (2020 + GameLogic.Instance.GetYear()).ToString();
+        _year.GetComponent<TextMeshProUGUI>().text = (GameLogic.START_YEAR + GameLogic.Instance.GetYear()).ToString();
         _season.GetComponent<TextMeshProUGUI>().text = GameLogic.Instance.GetSeason().ToString()  + ". Quartal";
 
         Tile selected = GridManager.Instance.GetSelectedTile();
@@ -26,9 +26,11 @@ public class TextManager : MonoBehaviour
             _tileType.GetComponent<TextMeshProUGUI>().text = "";
             _tileInfo.GetComponent<TextMeshProUGUI>().text = "";
         }
-    }
 
-    public void DisplayMessage(string message) {
-
+        if(GameLogic.Instance._displayMessage) {
+            _message.GetComponent<TextMeshProUGUI>().text = GameLogic.Instance._message;
+        } else {
+            _message.GetComponent<TextMeshProUGUI>().text = "";
+        }
     }
 }

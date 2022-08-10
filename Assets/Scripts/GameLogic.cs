@@ -13,8 +13,8 @@ using UnityEngine.UI;
 
     public enum Event
     {
-        wind,
-        sun,
+        good_wind,
+        good_sun,
         bad_wind,
         bad_sun,
         none
@@ -32,20 +32,39 @@ public class GameLogic : MonoBehaviour
     public static GameLogic Instance { get; private set; }
 
     // game constants
-    public const int YEARS = 10;
+    public const int YEARS = 7;
     public const int SEASONS = 4;
-    public const int MAX_VALUE = 100;
-
+    public const float MAX_VALUE = 100;
+    public const int START_YEAR = 2023;
 
     // current game timeline
     private int _year;
     private int _season;
 
+    // yearly changes
+    [SerializeField] private float _yearlyEnergyChange; 
+    [SerializeField] private int _yearlyMoney; 
+
+    // wind conditions
+    [SerializeField] private List<int> _windyColumns;
+    [SerializeField] private List<int> _windyRows;
+
+    // event probability
+    private Event[] _events = {Event.good_wind, Event.good_sun, Event.bad_wind, Event.bad_sun, Event.none, Event.none, Event.none};
+
+    // message handling
+    [HideInInspector] public string _message;
+    [HideInInspector] public bool _displayMessage;
+
+    // Taxes
+    [SerializeField] float _taxMoney;
+    [SerializeField] float _taxPeopleHate;
+
     // values of resources
-    private int _energy;
-    private int _biodiversity;
-    private int _happiness;
-    private int _money;
+    private Bar _energy;
+    private Bar _biodiversity;
+    private Bar _happiness;
+    private Bar _money;
     [SerializeField] private GameObject _energyBar;
     [SerializeField] private GameObject _biodiversityBar;
     [SerializeField] private GameObject _happinessBar;
@@ -66,16 +85,27 @@ public class GameLogic : MonoBehaviour
     private void Start() {
         _year = 0;
         _season = 1;
-        _energy = MAX_VALUE / 2;
-        _biodiversity = MAX_VALUE;
-        _money = MAX_VALUE;
-        _happiness = MAX_VALUE;
-        UpdateResources(0, 0, 0, 0);
+        _energy._value = MAX_VALUE * 0.25f;
+        _biodiversity._value = MAX_VALUE;
+        _money._value = MAX_VALUE  * 0.75f;
+        _happiness._value = MAX_VALUE;
+        _displayMessage = false;
+
+        foreach(KeyValuePair<EnergySource, EnergyLogic> source in _energySources) {
+            _energySources[source.Key]._buildAmount = 0;
+        }
+
+        ButtonManager.Instance.SetButtonsInteractable(false);
     }
 
     private void Awake(){
         Instance = this;
         FillDictionaries();   
+
+        _energy = _energyBar.transform.GetChild(0).GetComponent<Bar>();
+        _biodiversity = _biodiversityBar.transform.GetChild(0).GetComponent<Bar>();
+        _money = _moneyBar.transform.GetChild(0).GetComponent<Bar>();
+        _happiness = _happinessBar.transform.GetChild(0).GetComponent<Bar>();
     }
 
     private void FillDictionaries() {
@@ -92,27 +122,60 @@ public class GameLogic : MonoBehaviour
     }
 
     // end current year
-    private void EndYear() {
+    public void EndYear() {
         if(_year < YEARS) {
             _season = 1;
             _year++;
+            Debug.Log("Before: " + _energy._value);
+            _energy._value = _energy._value * (1.0f - _yearlyEnergyChange);
+            Debug.Log("After: " + _energy._value);
+            _money._value += _yearlyMoney;
+
+            int index = Random.Range(0, _events.Length);
+            switch (_events[index])
+            {
+                case Event.good_sun:
+                    _energy._value = _energy._value * (1.0f + 0.02f * _energySources[EnergySource.photovoltaic]._buildAmount);
+                    DisplayMessage("Dieses Jahr war viel Sonnenschein!");
+                    break;
+                case Event.bad_sun:
+                    _energy._value = _energy._value * (1.0f - 0.02f * _energySources[EnergySource.photovoltaic]._buildAmount);
+                    DisplayMessage("Dieses Jahr war wenig Sonnenschein!");
+                    break;
+                case Event.good_wind:
+                    _energy._value= _energy._value * (1.0f + 0.02f * _energySources[EnergySource.photovoltaic]._buildAmount);
+                    DisplayMessage("Dieses Jahr war viel Wind!");
+                    break;
+                case Event.bad_wind:
+                    _energy._value = _energy._value * (1.0f - 0.02f * _energySources[EnergySource.photovoltaic]._buildAmount);
+                    DisplayMessage("Dieses Jahr war wenig Wind!");
+                    break;
+                default:
+                    break;
+            }
         } else {
-            // end game
+            if(_energy._value >= MAX_VALUE) {
+                GameWon();
+            } else {
+                GameOver(_energy._name);
+            }
         }
     }
 
     // end current season
     private void EndSeason() {
+        _displayMessage = false;
         if(_season < SEASONS) {
             _season++;
         } else {
-            EndYear();
+            ButtonManager.Instance.EnableEndYearButton();
         }
     }
 
     // display message to players
     public void DisplayMessage(string message) {
-
+        _message = message;
+        _displayMessage = true;
     }
 
     // build energy source on tile
@@ -121,34 +184,60 @@ public class GameLogic : MonoBehaviour
         if(message != "") {
             DisplayMessage(message);
         } else {
-            UpdateResources(0, 0, 0, -_energySources[source]._price);
+            _energySources[source]._buildAmount++;
+            int cityCount = GridManager.Instance.CheckNeighbours(tile.GetPosition(), Tiletype.city);
+            int woodCount = source == EnergySource.windTurbine ? GridManager.Instance.CheckNeighbours(tile.GetPosition(), Tiletype.wood) : 1;
+            bool isWindy = false;
+            if(source == EnergySource.windTurbine) {
+
+                foreach (int column in _windyColumns) {
+                    if(tile.GetPosition().x == column) {
+                        isWindy = true;
+                    }
+                }
+
+                foreach (int row in _windyRows) {
+                    if(tile.GetPosition().y == row) {
+                        isWindy = true;
+                    }
+                }
+            }
+            float energy = isWindy ? _energySources[source]._energy * 2.0f : _energySources[source]._energy;
+            int closedGroundFactor = tile.GetTileType() == Tiletype.city || tile.GetTileType() == Tiletype.farm ? 0 : 1;
+            int cityFactor = tile.GetTileType() == Tiletype.city ? -1 : 1 * cityCount;
             EndSeason();
+            UpdateResources(energy * (1.0f - (_yearlyEnergyChange * _year)),  _energySources[source]._price, _energySources[source]._biodiversity * woodCount * closedGroundFactor, _energySources[source]._happiness * cityFactor);
         }
     }
 
     // update ressource values
-    public void UpdateResources(int energy, int biodiversity, int happiness, int money) {
-        _energy += energy;
-        _biodiversity += biodiversity;
-        _happiness += happiness;
-        _money += money;
-        UpdateBars();
+    public void UpdateResources(float energy, float money, float biodiversity, float happiness) {
+        _energy._value += energy;
+        _biodiversity._value += biodiversity;
+        _happiness._value += happiness;
+        _money._value += money;
 
-        if(_energy <= 0 || _biodiversity <= 0 || _happiness <= 0 || _money <= 0 ) {
-            GameOver();
+        if(_energy._value <= 0)  {
+            GameOver(_energy._name);
+        } else if(_biodiversity._value <= 0) {
+            GameOver(_biodiversity._name);
+        } else if(_happiness._value <= 0 ) {
+            GameOver(_happiness._name);
+        } else if(_money._value <= 0 ) {
+            GameOver(_money._name);
         }
     }
 
-    // update ressource bars
-    private void UpdateBars()
-    {
-        _energyBar.GetComponent<Bar>().SetValue(_energy);
-        _biodiversityBar.GetComponent<Bar>().SetValue(_biodiversity);
-        _happinessBar.GetComponent<Bar>().SetValue(_happiness);
-        _moneyBar.GetComponent<Bar>().SetValue(_money);
+    private void GameOver(string cause) {
+        DisplayMessage("Game Over: " + cause);
     }
 
-    private void GameOver() {
-        Debug.Log("Game Over");
+    private void GameWon() {
+        DisplayMessage("Game Won");
+    }
+
+    public void CollectTaxes() {
+        EndSeason();
+        UpdateResources(0, _taxMoney, 0, _taxPeopleHate);
     }
 }

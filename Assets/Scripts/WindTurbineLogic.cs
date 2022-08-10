@@ -7,9 +7,15 @@ public class WindTurbineLogic : MonoBehaviour, EnergyLogic
 {
     public static WindTurbineLogic Instance { get; private set; }
 
+    public int _buildAmount { get; set; }
+
     [field: SerializeField] public int _price { get; private set; }
 
     [field: SerializeField] public int _energy { get; private set; }
+
+    [field: SerializeField] public int _biodiversity { get; private set; }
+
+    [field: SerializeField] public int _happiness { get; private set; }
 
     [field: SerializeField] public Button _button { get; private set; }
 

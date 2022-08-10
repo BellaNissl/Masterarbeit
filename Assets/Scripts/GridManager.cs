@@ -42,19 +42,20 @@ public class GridManager : MonoBehaviour
     }
 
     // check tile neighbours for specific types
-    public List<Tile> GetNeighbours(Vector2 currentPos){
-        List<Tile> neighbours = new List<Tile>();
-        for(int x = -1; x <= currentPos.x + 1; x++) {
-            for(int y = -1; y <= currentPos.y + 1; y++) {
-                if(currentPos.x != x && currentPos.y != y) {
+    public int CheckNeighbours(Vector2 currentPos, Tiletype type){
+        int count = 0;
+        for(int x = (int)currentPos.x - 1; x <= currentPos.x + 1; x++) {
+            for(int y = (int)currentPos.y - 1; y <= currentPos.y + 1; y++) {
+                if(x != currentPos.x || y != currentPos.y) {
                     Tile neighbour = getTileAtPosition(new Vector2(x, y));
-                    if(neighbour != null) {
-                        neighbours.Add(neighbour);
+                    if(neighbour != null && neighbour.GetTileType() == type) {
+                        count++;
                     }
                 }
+
             }
         }
-        return neighbours;
+        return count;
     }
 
     // return tile at given position
@@ -74,10 +75,11 @@ public class GridManager : MonoBehaviour
         }
         _selectedPos = pos;
         if(_selectedPos != null && _selectedPos != INVALID) {
-            if( getTileAtPosition(_selectedPos).GetBuildStatus()) {
+            if(getTileAtPosition(_selectedPos).GetBuildStatus()) {
                 ButtonManager.Instance.SetButtonsInteractable(false);
             } else {
                 ButtonManager.Instance.AdaptIntegrability(getTileAtPosition(_selectedPos).GetTileType());
+                //SetButtonStati(getTileAtPosition(_selectedPos).GetTileType());
             }
         } else {
             ButtonManager.Instance.SetButtonsInteractable(true);
@@ -88,4 +90,51 @@ public class GridManager : MonoBehaviour
     public Tile GetSelectedTile(){
         return getTileAtPosition(_selectedPos);
     }
+
+    // set button infos according to the selected tile
+    // private void SetButtonStati(Tiletype type){   
+    //     Dictionary<EnergySource, EnergyLogic> sources = GameLogic.Instance._energySources;
+    //     switch(type) {
+    //         case Tiletype.farm:
+    //             ButtonManager.Instance.SetButtonDescription(EnergySource.agrovoltaic, 
+    //             sources[EnergySource.agrovoltaic]._energy, 
+    //             sources[EnergySource.agrovoltaic]._price, 
+    //             sources[EnergySource.agrovoltaic]._happiness, 
+    //             sources[EnergySource.agrovoltaic]._biodiversity);
+    //             ButtonManager.Instance.SetButtonDescriptionEmpty(EnergySource.photovoltaic);
+    //             ButtonManager.Instance.SetButtonDescriptionEmpty(EnergySource.windTurbine);
+    //             break;
+    //         case Tiletype.city:
+    //             ButtonManager.Instance.SetButtonDescription(EnergySource.photovoltaic, 
+    //             sources[EnergySource.photovoltaic]._energy, 
+    //             sources[EnergySource.photovoltaic]._price, 
+    //             sources[EnergySource.photovoltaic]._happiness * (-1), 
+    //             sources[EnergySource.photovoltaic]._biodiversity);
+    //             ButtonManager.Instance.SetButtonDescriptionEmpty(EnergySource.agrovoltaic);
+    //             ButtonManager.Instance.SetButtonDescriptionEmpty(EnergySource.windTurbine);
+    //             break;
+    //         case Tiletype.field:
+    //             int cityCount = GridManager.Instance.CheckNeighbours(GetSelectedTile().GetPosition(), Tiletype.city);
+    //             int woodCount = GridManager.Instance.CheckNeighbours(GetSelectedTile().GetPosition(), Tiletype.wood);
+
+    //             ButtonManager.Instance.SetButtonDescription(EnergySource.photovoltaic, 
+    //             sources[EnergySource.photovoltaic]._energy, 
+    //             sources[EnergySource.photovoltaic]._price, 
+    //             sources[EnergySource.photovoltaic]._happiness * cityCount, 
+    //             sources[EnergySource.photovoltaic]._biodiversity);
+
+    //             ButtonManager.Instance.SetButtonDescription(EnergySource.windTurbine, 
+    //             sources[EnergySource.windTurbine]._energy, 
+    //             sources[EnergySource.windTurbine]._price, 
+    //             sources[EnergySource.windTurbine]._happiness * cityCount, 
+    //             sources[EnergySource.windTurbine]._biodiversity * woodCount);
+
+    //             ButtonManager.Instance.SetButtonDescriptionEmpty(EnergySource.agrovoltaic);
+
+    //             break;
+    //         default:
+    //             break;
+    //     }
+
+    // }
 }

@@ -5,14 +5,11 @@ using UnityEngine.UI;
 
 public class Bar : MonoBehaviour
 {
+    public string _name;
     private const float MAX_VALUE = 100.0f;
-    private float _value;
+    [HideInInspector] public float _value;
 
     private Image _bar;
-
-    public void SetValue(float value) {
-        _value = value;
-    }
 
     // Start is called before the first frame update
     void Start()

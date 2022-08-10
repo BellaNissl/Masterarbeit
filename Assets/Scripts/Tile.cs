@@ -54,6 +54,10 @@ public class Tile : MonoBehaviour
         return "cannot build that here";
     }
 
+    public Vector2 GetPosition() {
+        return new Vector2(GetComponent<Transform>().position.x, GetComponent<Transform>().position.y);
+    }
+
     // highlight when hovering
     private void OnMouseEnter(){
         _highlight.SetActive(true);
@@ -67,7 +71,7 @@ public class Tile : MonoBehaviour
     // select the tile on mouse down
     private void OnMouseDown(){
         _selection.SetActive(true);
-        GridManager.Instance.SelectTile(new Vector2(GetComponent<Transform>().position.x, GetComponent<Transform>().position.y));
+        GridManager.Instance.SelectTile(GetPosition());
     }
 
     // deselect the tile
