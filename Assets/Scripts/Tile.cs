@@ -11,6 +11,7 @@ public class Tile : MonoBehaviour
     [SerializeField] private SpriteRenderer _renderer;
     [SerializeField] private GameObject _highlight;
     [SerializeField] private GameObject _selection;
+    [SerializeField] private GameObject _energyField;
 
     // logic
     private GameLogic _game;
@@ -51,10 +52,11 @@ public class Tile : MonoBehaviour
         if(_game._tiles[_type]._supportedEnergy.Contains(source)) {
             _buildType = source;
             if(_game._energySources[source]._sprite != null) {
-                _renderer.sprite = _game._energySources[source]._sprite;
+                _energyField.GetComponent<SpriteRenderer>().sprite = _game._energySources[source]._sprite;
             } else {
-                _renderer.color = _game._energySources[source]._color;
+                _energyField.GetComponent<SpriteRenderer>().color = _game._energySources[source]._color;
             }
+            _energyField.SetActive(true);
             _built = true;
             return "";
         } 
