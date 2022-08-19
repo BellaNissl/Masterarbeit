@@ -11,4 +11,6 @@ public interface TileLogic
     Sprite _sprite { get; }
 
     string _name { get; }
+
+    List<float> _GetEnergyValues(EnergySource source, Vector2 position);
 }

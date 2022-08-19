@@ -303,4 +303,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: 
-  _value: 0
+  _animationTime: 0.5

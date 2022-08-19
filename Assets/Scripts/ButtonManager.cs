@@ -33,28 +33,10 @@ public class ButtonManager : MonoBehaviour
 
     private void AdaptIntegrability(Tiletype type, EnergySource source) {
         bool interactable = GameLogic.Instance._tiles[type]._supportedEnergy.Contains(source);
-
+        
         if(interactable) {
-            int cityFactor = 1;
-            int bioFactor = 1;
-
-            if(source == EnergySource.windTurbine) {
-                bioFactor = GridManager.Instance.CheckNeighbours(GridManager.Instance.GetSelectedTile().GetPosition(), Tiletype.wood);
-                cityFactor = GridManager.Instance.CheckNeighbours(GridManager.Instance.GetSelectedTile().GetPosition(), Tiletype.city);
-            } else if(source == EnergySource.photovoltaic) {
-                if(type == Tiletype.city) {
-                    cityFactor = -1;
-                    bioFactor = 0;
-                } else {
-                    cityFactor = GridManager.Instance.CheckNeighbours(GridManager.Instance.GetSelectedTile().GetPosition(), Tiletype.city);
-                }
-            }
-
-            SetButtonDescription(source, 
-                    GameLogic.Instance._energySources[source]._energy, 
-                    GameLogic.Instance._energySources[source]._price, 
-                    GameLogic.Instance._energySources[source]._happiness * cityFactor, 
-                    GameLogic.Instance._energySources[source]._biodiversity * bioFactor);
+            List<float> values = GameLogic.Instance._tiles[type]._GetEnergyValues(source, GridManager.Instance.GetSelectedTile().GetPosition());
+            SetButtonDescription(source, (int)values[0], (int)values[1], (int)values[2], (int)values[3]);
         } else {
             SetButtonDescriptionEmpty(source);
         }
@@ -134,7 +116,7 @@ public class ButtonManager : MonoBehaviour
         description.text = "";
     }
 
-    public void SetButtonDescription(EnergySource source, int energyEffect, int moneyEffect, int peopleEffect, int biodiversityEffect) {
+    public void SetButtonDescription(EnergySource source, int energyEffect, int moneyEffect, int biodiversityEffect, int peopleEffect) {
         Button button = GameLogic.Instance._energySources[source]._button;
         string text = "";
         TextMeshProUGUI description = button.transform.GetComponentsInChildren<TextMeshProUGUI >()[1];

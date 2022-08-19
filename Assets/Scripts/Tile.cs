@@ -5,7 +5,6 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
     [SerializeField] private Tiletype _type;
-    // [SerializeField] private Tile[] _neighbours;
 
     // render and selection
     [SerializeField] private SpriteRenderer _renderer;

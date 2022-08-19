@@ -17,4 +17,21 @@ public class FarmLogic : MonoBehaviour, TileLogic
     private void Awake(){
         Instance = this;
     }
+
+    public List<float> _GetEnergyValues(EnergySource source, Vector2 position){
+        float energy = 0;
+        float money = 0;
+        float biodiversity = 0;
+        float happiness = 0;
+        
+        if(_supportedEnergy.Contains(source)) {
+            Dictionary<EnergySource, EnergyLogic> sources = GameLogic.Instance._energySources;
+            money = sources[source]._price;
+            energy = sources[source]._energy;
+            biodiversity = sources[source]._biodiversity;
+            happiness = sources[source]._happiness;
+        }
+
+        return new List<float> {energy, money, biodiversity, happiness};
+    }
 }
