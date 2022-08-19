@@ -35,7 +35,7 @@ public class ButtonManager : MonoBehaviour
         bool interactable = GameLogic.Instance._tiles[type]._supportedEnergy.Contains(source);
         
         if(interactable) {
-            List<float> values = GameLogic.Instance._tiles[type]._GetEnergyValues(source, GridManager.Instance.GetSelectedTile().GetPosition());
+            List<float> values = GameLogic.Instance._tiles[type].GetEnergyValues(source, GridManager.Instance.GetSelectedTile().GetPosition());
             SetButtonDescription(source, (int)values[0], (int)values[1], (int)values[2], (int)values[3]);
         } else {
             SetButtonDescriptionEmpty(source);

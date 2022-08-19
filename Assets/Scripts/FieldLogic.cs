@@ -18,7 +18,7 @@ public class FieldLogic : MonoBehaviour, TileLogic
         Instance = this;
     }
 
-    public List<float> _GetEnergyValues(EnergySource source, Vector2 position){
+    public List<float> GetEnergyValues(EnergySource source, Vector2 position){
         float energy = 0;
         float money = 0;
         float biodiversity = 0;

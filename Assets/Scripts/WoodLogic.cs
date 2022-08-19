@@ -18,7 +18,7 @@ public class WoodLogic : MonoBehaviour, TileLogic
         Instance = this;
     }
 
-    public List<float> _GetEnergyValues(EnergySource source, Vector2 position){
+    public List<float> GetEnergyValues(EnergySource source, Vector2 position){
         return new List<float>{0,0,0,0};
     }
 }

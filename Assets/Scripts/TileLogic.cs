@@ -12,5 +12,5 @@ public interface TileLogic
 
     string _name { get; }
 
-    List<float> _GetEnergyValues(EnergySource source, Vector2 position);
+    List<float> GetEnergyValues(EnergySource source, Vector2 position);
 }

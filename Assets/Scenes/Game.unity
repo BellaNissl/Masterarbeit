@@ -2053,7 +2053,7 @@ RectTransform:
   - {fileID: 335473731}
   - {fileID: 1663447416}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2232,7 +2232,7 @@ Transform:
   - {fileID: 243970879}
   - {fileID: 744081229}
   m_Father: {fileID: 2132603727}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1041100949
 PrefabInstance:
@@ -2351,7 +2351,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4632045338868443138, guid: d0fac8ffd570cc940942f75cae73843e, type: 3}
       propertyPath: _name
-      value: "Biodiversit\xE4t"
+      value: "Die Biodiversit\xE4t"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0fac8ffd570cc940942f75cae73843e, type: 3}
@@ -3014,7 +3014,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4632045338868443138, guid: d0fac8ffd570cc940942f75cae73843e, type: 3}
       propertyPath: _name
-      value: Strom
+      value: Der Strom
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0fac8ffd570cc940942f75cae73843e, type: 3}
@@ -3303,12 +3303,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1359295795}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.390548, y: -3.3371005, z: -0.94026625}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2132603727}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1362795857
 GameObject:
@@ -3847,7 +3847,7 @@ Transform:
   - {fileID: 1830802281}
   - {fileID: 775365545}
   m_Father: {fileID: 2132603727}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1531261365
 GameObject:
@@ -3894,7 +3894,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2132603727}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1663447415
 GameObject:
@@ -4399,12 +4399,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1850515812}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.390548, y: -3.3371005, z: -0.94026625}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2132603727}
-  m_RootOrder: 1
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1978172538
 PrefabInstance:
@@ -4523,7 +4523,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4632045338868443138, guid: d0fac8ffd570cc940942f75cae73843e, type: 3}
       propertyPath: _name
-      value: Finanzen
+      value: Die Finanzen
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0fac8ffd570cc940942f75cae73843e, type: 3}
@@ -4825,13 +4825,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1359295798}
-  - {fileID: 1850515814}
   - {fileID: 1531261367}
   - {fileID: 1530032479}
   - {fileID: 959685268}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2132603728
 MonoBehaviour:
@@ -4974,7 +4972,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4632045338868443138, guid: d0fac8ffd570cc940942f75cae73843e, type: 3}
       propertyPath: _name
-      value: Volksmeinung
+      value: Die Volksmeinung
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0fac8ffd570cc940942f75cae73843e, type: 3}

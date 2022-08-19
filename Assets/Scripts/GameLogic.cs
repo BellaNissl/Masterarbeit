@@ -189,8 +189,9 @@ public class GameLogic : MonoBehaviour
             DisplayMessage(message);
         } else {
             _energySources[source]._buildAmount++;
-            List<float> values = _tiles[tile.GetTileType()]._GetEnergyValues(source, tile.GetPosition());
+            List<float> values = _tiles[tile.GetTileType()].GetEnergyValues(source, tile.GetPosition());
             UpdateResources(values[0], values[1], values[2], values[3]);
+            EndSeason();
         }
     }
 
