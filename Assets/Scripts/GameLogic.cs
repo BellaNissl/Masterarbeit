@@ -85,6 +85,14 @@ public class GameLogic : MonoBehaviour
     private void Start() {
         _year = 0;
         _season = 1;
+        
+
+        _energy = _energyBar.GetComponent<Bar>();
+        Debug.Log(JsonUtility.ToJson(_energy));
+        _biodiversity = _biodiversityBar.GetComponent<Bar>();
+        _money = _moneyBar.GetComponent<Bar>();
+        _happiness = _happinessBar.GetComponent<Bar>();
+    
         _energy.SetInitialValue(MAX_VALUE * 0.25f);
         _biodiversity.SetInitialValue(MAX_VALUE);
         _money.SetInitialValue(MAX_VALUE  * 0.75f);
@@ -107,11 +115,8 @@ public class GameLogic : MonoBehaviour
     private void Awake(){
         Instance = this;
         FillDictionaries();   
+        
 
-        _energy = _energyBar.transform.GetChild(0).GetComponent<Bar>();
-        _biodiversity = _biodiversityBar.transform.GetChild(0).GetComponent<Bar>();
-        _money = _moneyBar.transform.GetChild(0).GetComponent<Bar>();
-        _happiness = _happinessBar.transform.GetChild(0).GetComponent<Bar>();
     }
 
     private void FillDictionaries() {
@@ -215,11 +220,14 @@ public class GameLogic : MonoBehaviour
 
     private void GameOver(string cause) {
         string article = cause == "Die Finanzen" ? "sind" : "ist";
-        DisplayMessage("Game Over: " + cause + " " + article + " zu weit gesunken!");
+        string message = cause + " " + article + " zu weit gesunken!";
+        DisplayMessage("Verloren: " + message);
+        GameStateManager.Instance.DisplayGameOverScreen(message);
     }
 
     private void GameWon() {
         DisplayMessage("Gewonnen!");
+        GameStateManager.Instance.DisplayGameWonScreen();
     }
 
     public void CollectTaxes() {

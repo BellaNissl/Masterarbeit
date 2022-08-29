@@ -69,7 +69,9 @@ public class Tile : MonoBehaviour
 
     // highlight when hovering
     private void OnMouseEnter(){
-        _highlight.SetActive(true);
+        if(GameStateManager.Instance.IsGameInteractable()) {
+            _highlight.SetActive(true);
+        }
     }
 
     // stop highlighting when leaving
@@ -79,8 +81,10 @@ public class Tile : MonoBehaviour
 
     // select the tile on mouse down
     private void OnMouseDown(){
-        _selection.SetActive(true);
-        GridManager.Instance.SelectTile(GetPosition());
+        if(GameStateManager.Instance.IsGameInteractable()) {
+            _selection.SetActive(true);
+            GridManager.Instance.SelectTile(GetPosition());
+        }
     }
 
     // deselect the tile
