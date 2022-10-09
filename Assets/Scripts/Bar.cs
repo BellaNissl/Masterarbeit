@@ -12,10 +12,18 @@ public class Bar : MonoBehaviour
     private float _previousValue;
 
     private Image _bar;
+    private bool increasing = false;
+    private bool decreasing = false;
 
     public void SetValue(float value) {
+        value = value > MAX_VALUE ? MAX_VALUE : value;
         _previousValue = _value;
         _value = value;
+        if(_previousValue < _value) {
+            increasing = true;
+        } else if(_previousValue > _value)  {
+            decreasing = true;
+        }
     }
 
     public void SetInitialValue(float value) {
@@ -37,17 +45,18 @@ public class Bar : MonoBehaviour
     {
         float speed = Mathf.Abs(_value / MAX_VALUE - _previousValue / MAX_VALUE) / _animationTime;
 
-        if(_previousValue < _value) {
+        if(increasing) {
             if(_bar.fillAmount < _value / MAX_VALUE) {
                 _bar.fillAmount += speed * Time.deltaTime;
             } else {
                 _bar.fillAmount = _value / MAX_VALUE;
-            }
-        } else {
+                increasing = false;            }
+        } else if(decreasing) {
             if(_bar.fillAmount > _value / MAX_VALUE) {
                 _bar.fillAmount -=  speed * Time.deltaTime;
-            } else {
+            } else if(decreasing) {
                 _bar.fillAmount = _value / MAX_VALUE;
+                decreasing = false;
             }
         }
        

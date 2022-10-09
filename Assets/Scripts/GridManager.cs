@@ -81,7 +81,7 @@ public class GridManager : MonoBehaviour
                 ButtonManager.Instance.AdaptIntegrability(getTileAtPosition(_selectedPos).GetTileType());
             }
         } else {
-            ButtonManager.Instance.SetButtonsInteractable(true);
+            ButtonManager.Instance.SetButtonsInteractable(false);
         }
     }
 
